@@ -4,6 +4,18 @@ import './styles/index.css';
 import App from './routers';
 import reportWebVitals from './reportWebVitals';
 
+if (window.self === window.top) {
+  document.body.style.display = 'block';
+} else {
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
+  window.top.location = window.self.location;
+}
+
+// for fixing back button in firefox to not cache the dom and return the old page after back button
+// eslint-disable-next-line @typescript-eslint/no-empty-function
+window.addEventListener('unload', () => {});
+
 ReactDOM.render(
   <React.StrictMode>
     <App />
