@@ -1,43 +1,46 @@
-import { Button, Input } from "antd";
-import React, { FC, useState } from "react";
+import { Link } from 'react-router-dom';
+import { Button, Input } from 'antd';
 
-interface FormType {
-  email: string;
-  password: string;
-}
+import useLogin, { IUseLogin } from './useLogin';
+import '../index.css';
 
-const Login: FC = () => {
-  const [formValue, setFormValue] = useState<FormType>({
-    email: "",
-    password: "",
-  });
-  const loginHandler = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-  };
+function Login() {
+  const { isLoading, onLogin }: IUseLogin = useLogin();
 
   return (
-    <div>
-      <form onSubmit={loginHandler}>
-        <Input
-          type="email"
-          placeholder="Enter your email"
-          value={formValue.email}
-          onChange={(e) =>
-            setFormValue((prev) => ({ ...prev, email: e.target.value }))
-          }
-        />
-        <Input
+    <form className="auth-pages-container" onSubmit={onLogin}>
+      <h5 className="auth-pages__title">Login</h5>
+      <div className="auth-pages__input">
+        <p>Email:</p>
+        <Input type="email" name="email" placeholder="Enter your email" required />
+      </div>
+      <div className="auth-pages__input">
+        <p>Password:</p>
+        <Input.Password
           type="password"
+          name="password"
           placeholder="Enter your password"
-          value={formValue.password}
-          onChange={(e) =>
-            setFormValue((prev) => ({ ...prev, password: e.target.value }))
-          }
+          required
         />
-        <Button htmlType="submit">LOGIN</Button>
-      </form>
-    </div>
+      </div>
+      <div className="login__forgot">
+        <Link to={'/auth/forgot_password'}>Forgot Password</Link>
+      </div>
+      <Button
+        htmlType="submit"
+        type="primary"
+        className="auth-pages__button login__button"
+        loading={isLoading}
+      >
+        Login
+      </Button>
+      <div>
+        <p>
+          No account? <Link to={'/auth/signup'}>Sign Up</Link>
+        </p>
+      </div>
+    </form>
   );
-};
+}
 
 export default Login;
