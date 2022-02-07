@@ -2,13 +2,13 @@ import { Link } from 'react-router-dom';
 import { Button, Input } from 'antd';
 
 import useLogin, { IUseLogin } from './useLogin';
-import '../index.css';
+import '../style.css';
 
 function Login() {
   const { isLoading, onLogin }: IUseLogin = useLogin();
 
   return (
-    <form className="auth-pages-container" onSubmit={onLogin}>
+    <form className="auth-pages-container animation-fade-in-top" onSubmit={onLogin}>
       <h5 className="auth-pages__title">Login</h5>
       <div className="auth-pages__input">
         <p>Email:</p>

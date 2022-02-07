@@ -15,8 +15,10 @@ html[data-theme='light'] {
   --primary: #1890ff;
   --black: #111111;
   --white: #ffffff;
+  --grey: #888888;
   --bg: #f4f4f4;
-  --text: #888888;
+  --text: #252525;
+  --text-grey: #888888;
   --danger: #ed4c5c;
   --divider: #dee2e6;
   --dimmer: rgba(0, 0, 0, 0.4);
@@ -27,18 +29,29 @@ body {
   font-family: 'Lato', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  color: var(--text);
 }
 
 #root {
   min-height: 100vh;
 }
 
+@import './animations.css';
+
 /* ============== ANTD OVERRIDES ============== */
 
-label,
-button,
-input {
-  user-select: none;
+.ant-input {
+  height: 2.5rem;
+}
+.ant-input-password {
+  padding: 0 0.688rem;
+}
+.ant-input-password .ant-input {
+  height: 2.375rem;
+}
+.ant-divider-horizontal.ant-divider-with-text::before,
+.ant-divider-horizontal.ant-divider-with-text::after {
+  top: 0;
 }
 
 /* ============== END ANTD OVERRIDES ============== */
