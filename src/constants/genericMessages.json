@@ -1,0 +1,12 @@
+{
+  "GENERIC_ERROR_MESSAGE": "Oops! An error just happened. Please contact your system administrator for further assistance.",
+  "NAME_CURRENT_EMPTY": "Please enter your name.",
+  "ORGANISATION_CURRENT_EMPTY": "Please enter your organisation.",
+  "EMAIL_INVALID_FORMAT": "Invalid email format.",
+  "EMAIL_CURRENT_EMPTY": "Please enter your email.",
+  "PASSWORD_CURRENT_EMPTY": "Please enter your password.",
+  "PASSWORD_NEW_EMPTY": "Please enter your new password.",
+  "PASSWORD_CONFIRM_EMPTY": "Please enter your confirmation password.",
+  "PASSWORD_CONFIRM_NOT_MATCH": "Password is not match.",
+  "PASSWORD_INVALID_LENGTH": "Password at least 6 character."
+}

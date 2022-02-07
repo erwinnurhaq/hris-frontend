@@ -1,0 +1,103 @@
+/* ==================== COMMON ==================== */
+
+.auth-pages-container {
+  width: 18.75rem;
+  display: grid;
+  justify-items: center;
+}
+
+@media screen and (max-width: 480px) {
+  .auth-pages-container {
+    width: 80%;
+  }
+}
+
+.auth-pages__title {
+  padding: 3rem 0 1.5rem 0;
+  font-size: 1.5rem;
+  font-weight: 400;
+}
+.auth-pages__input {
+  margin: 0.5rem 0;
+  width: 100%;
+}
+.auth-pages__input p {
+  margin: 0;
+  padding-bottom: 0.25rem;
+}
+.auth-pages__input small {
+  color: var(--danger);
+}
+.auth-pages__button {
+  height: 2.5rem;
+  width: 100%;
+}
+
+/* ==================== LOGIN ==================== */
+
+.login__forgot {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+}
+.login__button {
+  margin: 1.5rem 0;
+}
+
+/* ================ FORGOT PASSWORD ================ */
+
+.forgot-password__title {
+  padding-top: 3.75rem;
+  padding-bottom: 1.5rem;
+}
+.forgot-password__subtitle {
+  text-align: center;
+  color: var(--text-grey);
+  padding-bottom: 1.5rem;
+}
+.forgot-password__button-send {
+  margin: 0.5rem 0;
+}
+.forgot-password__button-back {
+  margin-bottom: 3.75rem;
+  font-weight: 400;
+}
+.forgot-password__button-back:not(:hover) {
+  color: var(--text-grey);
+}
+
+/* ================ SETUP ACCOUNT ================ */
+
+.signup__title {
+  padding-top: 1.875rem;
+  padding-bottom: 1.5rem;
+}
+.signup__subtitle {
+  margin: 0;
+}
+.signup__button {
+  margin-top: 1.5rem;
+}
+.signup__back-button {
+  margin-top: 0.5rem;
+  margin-bottom: 3.75rem;
+}
+
+/* ================ ALERT SECTION ================ */
+
+.alert-section-container {
+  padding-top: 3.5rem;
+}
+.alert-section__title {
+  padding: 2.125rem 0 0.875rem 0;
+  font-size: 1.125rem;
+  font-weight: 700;
+}
+.alert-section__description {
+  text-align: center;
+  color: var(--text-grey);
+  padding: 0 2rem;
+}
+.alert-section__button {
+  margin: 2.125rem 0 3.75rem 0;
+}
