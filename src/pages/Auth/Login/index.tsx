@@ -24,7 +24,7 @@ function Login() {
         />
       </div>
       <div className="login__forgot">
-        <Link to={'/auth/forgot_password'}>Forgot Password</Link>
+        <Link to="/auth/forgot_password">Forgot Password</Link>
       </div>
       <Button
         htmlType="submit"
@@ -36,7 +36,7 @@ function Login() {
       </Button>
       <div>
         <p>
-          No account? <Link to={'/auth/signup'}>Sign Up</Link>
+          No account? <Link to="/auth/signup">Sign Up</Link>
         </p>
       </div>
     </form>

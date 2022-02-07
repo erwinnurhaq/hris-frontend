@@ -1,4 +1,4 @@
-import { NavigateFunction, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Button, Divider, Input } from 'antd';
 
 import { ReactComponent as EmailIcon } from '../../../assets/icons/email-sent.svg';
@@ -7,7 +7,6 @@ import useSignup, { IUseSignup } from './useSetupAccount';
 import '../style.css';
 
 function Signup() {
-  const navigate: NavigateFunction = useNavigate();
   const { isLoading, isSuccess, error, onSave, onResendActivation }: IUseSignup = useSignup();
 
   if (isSuccess) {
@@ -70,14 +69,9 @@ function Signup() {
       >
         Register
       </Button>
-      <Button
-        type="link"
-        className="auth-pages__button signup__back-button"
-        loading={isLoading}
-        onClick={() => navigate('/auth/login')}
-      >
+      <Link className="auth-pages__button signup__back-button" to="/auth/login">
         Back to Login
-      </Button>
+      </Link>
     </form>
   );
 }

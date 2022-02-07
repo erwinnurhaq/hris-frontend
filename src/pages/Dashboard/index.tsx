@@ -1,8 +1,8 @@
+import { NavigateFunction, useNavigate } from 'react-router-dom';
 import { Button } from 'antd';
-import { useNavigate } from 'react-router-dom';
 
 const Dashboard = () => {
-  const navigate = useNavigate();
+  const navigate: NavigateFunction = useNavigate();
   async function onLogout() {
     try {
       await fetch('http://localhost:2000/auth/logout', { credentials: 'include' });

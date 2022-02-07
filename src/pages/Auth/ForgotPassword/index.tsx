@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Button, Input } from 'antd';
 
 import { ReactComponent as EmailIcon } from '../../../assets/icons/email-sent.svg';
@@ -7,7 +7,6 @@ import useForgotPassword, { IUseForgotPassword } from './useForgotPassword';
 import '../style.css';
 
 function ForgotPassword() {
-  const navigate = useNavigate();
   const { isLoading, isSuccess, onSendRequest }: IUseForgotPassword = useForgotPassword();
 
   if (isSuccess) {
@@ -43,14 +42,9 @@ function ForgotPassword() {
       >
         Send Request
       </Button>
-      <Button
-        type="link"
-        className="auth-pages__button forgot-password__button-back"
-        loading={isLoading}
-        onClick={() => navigate('/auth/login')}
-      >
+      <Link className="auth-pages__button forgot-password__button-back" to="/auth/login">
         Back to Login
-      </Button>
+      </Link>
     </form>
   );
 }

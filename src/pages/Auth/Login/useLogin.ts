@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState, FormEvent } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { NavigateFunction, useNavigate } from 'react-router-dom';
 import { message } from 'antd';
 
 export interface IUseLogin {
@@ -8,7 +8,7 @@ export interface IUseLogin {
 }
 
 function useLogin() {
-  const navigate = useNavigate();
+  const navigate: NavigateFunction = useNavigate();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const isMounted = useRef<boolean>(false);
 
