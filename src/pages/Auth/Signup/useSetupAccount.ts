@@ -1,7 +1,8 @@
 import { useState, useRef, useEffect, FormEvent } from 'react';
 import { message } from 'antd';
 
-import MESSAGES from '../../../constants/genericMessages.json';
+import { userSignup } from '../../../services/auth.service';
+import { IFormDataValues } from '../../../interfaces/common.interface';
 
 export interface IErrorPassInfo {
   password: string;
@@ -47,9 +48,9 @@ function useSignup() {
 
     try {
       setIsLoading(true);
-      const form = new FormData(ev.target as HTMLFormElement);
-      const values = Object.fromEntries(form);
-      const errorPassword = checkPasswordValid(
+      const form: FormData = new FormData(ev.target as HTMLFormElement);
+      const values: IFormDataValues = Object.fromEntries(form);
+      const errorPassword: IErrorPassInfo = checkPasswordValid(
         values.password as string,
         values.confirmPassword as string
       );
@@ -60,17 +61,24 @@ function useSignup() {
         return;
       }
 
+      await userSignup({
+        name: values.name,
+        email: values.email,
+        password: values.password,
+        school: values.school,
+      });
+
       if (!isMounted.current) return;
 
       emailRef.current = values.email as string;
       message.success('Email successfully sent.');
       setIsSuccess(true);
       setIsLoading(false);
-    } catch (err: any) {
+    } catch (err: unknown) {
       if (!isMounted.current) return;
 
+      message.error(err as string);
       setIsLoading(false);
-      message.error(err.message || MESSAGES.GENERIC_ERROR_MESSAGE);
     }
   }
 

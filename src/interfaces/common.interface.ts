@@ -1,3 +1,7 @@
+export interface IFormDataValues {
+  [key: string]: any;
+}
+
 export interface IFetchSuccess {
   message?: string;
 }

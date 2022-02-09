@@ -1,24 +1,28 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Navigate, Outlet } from 'react-router-dom';
 
 import AuthLayoutBg from '../../assets/images/auth-layout-bg.jpg';
 import HRISLogo from '../../assets/images/hris-logo.png';
+import { userRefresh } from '../../services/auth.service';
 import './index.css';
 
 function AuthLayout() {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [isAuth, setIsAuth] = useState<boolean>(false);
 
+  const isMounted = useRef<boolean>(false);
+
   const checkAuth = async () => {
     try {
       setIsLoading(true);
-      const res = await fetch('http://localhost:2000/auth/refresh', { credentials: 'include' });
-      if (res.status !== 200) {
-        throw await res.json();
-      }
+      await userRefresh();
+      if (!isMounted.current) return;
+
       setIsAuth(true);
       setIsLoading(false);
     } catch (err) {
+      if (!isMounted.current) return;
+
       setIsAuth(false);
       setIsLoading(false);
     }
@@ -26,9 +30,11 @@ function AuthLayout() {
 
   useEffect(() => {
     console.log('mounted auth layout');
+    isMounted.current = true;
     checkAuth();
     return () => {
       console.log('unmounted auth layout');
+      isMounted.current = false;
     };
   }, []);
 

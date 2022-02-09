@@ -1,7 +1,8 @@
 import { useState, useRef, useEffect, FormEvent } from 'react';
 import { message } from 'antd';
 
-import MESSAGES from '../../../constants/genericMessages.json';
+import { IFormDataValues } from '../../../interfaces/common.interface';
+import { userRequestResetPassword } from '../../../services/auth.service';
 
 export interface IUseForgotPassword {
   isLoading: boolean;
@@ -21,16 +22,20 @@ function useForgotPassword() {
 
     try {
       setIsLoading(true);
+      const form: FormData = new FormData(ev.target as HTMLFormElement);
+      const values: IFormDataValues = Object.fromEntries(form);
+
+      await userRequestResetPassword(values.email);
       if (!isMounted.current) return;
 
       message.success('Email successfully sent.');
       setIsSuccess(true);
       setIsLoading(false);
-    } catch (err: any) {
+    } catch (err: unknown) {
       if (!isMounted.current) return;
 
+      message.error(err as string);
       setIsLoading(false);
-      message.error(err.message || MESSAGES.GENERIC_ERROR_MESSAGE);
     }
   }
 
