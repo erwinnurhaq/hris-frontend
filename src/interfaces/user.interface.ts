@@ -62,5 +62,5 @@ export interface IUserDetail extends IUser {
 export interface IInvitedUserData {
   name: string;
   email: string;
-  school: { name: string; [key: string]: any };
+  school: ISchool;
 }
