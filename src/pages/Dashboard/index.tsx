@@ -1,5 +1,6 @@
 import { NavigateFunction, useNavigate } from 'react-router-dom';
-import { Button } from 'antd';
+import { Button, message } from 'antd';
+import { get } from '../../utils/fetcher';
 
 const Dashboard = () => {
   const navigate: NavigateFunction = useNavigate();
@@ -11,9 +12,22 @@ const Dashboard = () => {
       console.log(err);
     }
   }
+  async function getUser() {
+    try {
+      const res = await Promise.all([
+        get('http://localhost:2000/users?page=1&size=10'),
+        get('http://localhost:2000/users/12'),
+      ]);
+      console.log(res);
+    } catch (err) {
+      console.log(err);
+      message.error(err as string);
+    }
+  }
+
   return (
     <div>
-      <h1>Dashboard</h1>
+      <h1 onClick={getUser}>Dashboard</h1>
       <Button onClick={onLogout}>Logout</Button>
     </div>
   );
