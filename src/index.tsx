@@ -4,12 +4,12 @@ import './styles/index.css';
 import App from './routers';
 import reportWebVitals from './reportWebVitals';
 
-if (window.self === window.top) {
-  document.body.style.display = 'block';
-} else {
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
-  window.top.location = window.self.location;
+if (window.self && window.top) {
+  if (window.self === window.top) {
+    document.body.style.display = 'block';
+  } else {
+    window.top.location = window.self.location;
+  }
 }
 
 // for fixing back button in firefox to not cache the dom and return the old page after back button
