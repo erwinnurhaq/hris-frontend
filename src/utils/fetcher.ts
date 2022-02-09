@@ -16,67 +16,27 @@ function refreshAndRetryFetch() {
   });
 }
 
-// async function responseMiddleware<T>(response: Response, options?: RequestInit): Promise<T> {
-//   const status: number = response.status || 500;
-//   const result: T & { message?: string } = await response.json();
-
-//   // if the access token is invalid
-//   if (status === 401 && result?.message === 'Invalid Token') {
-//     if (response.url.includes('/auth/refresh') || !options) {
-//       // Logout
-//       await userLogout();
-//       throw new Error(result?.message || 'Error');
-//     }
-
-//     if (!isRefreshingToken) {
-//       refreshAndRetryFetch();
-//     }
-
-//     // add queue fetch
-//     return new Promise((resolve) => {
-//       queue.push(() => {
-//         resolve(fetch(response.url, options).then((response2) => responseMiddleware<T>(response2)));
-//       });
-//     });
-//   }
-
-//   if (status > 400) {
-//     throw new Error(result?.message || 'Error');
-//   }
-
-//   return result;
-// }
-function responseMiddleware<T>(
-  resolve: (value: T | PromiseLike<T>) => void,
-  response: Response,
-  result: T & { message?: string },
-  options?: RequestInit
-) {
+async function responseMiddleware<T>(response: Response, options?: RequestInit): Promise<T> {
   const status: number = response.status || 500;
+  const result: T & { message?: string } = await response.json();
 
   // if the access token is invalid
   if (status === 401 && result?.message === 'Invalid Token') {
     if (response.url.includes('/auth/refresh') || !options) {
       // Logout
-      return userLogout();
+      await userLogout();
+      throw new Error(result?.message || 'Error');
     }
 
     if (!isRefreshingToken) {
+      // sync
       refreshAndRetryFetch();
     }
 
     // add queue fetch
-    return new Promise((resolve2) => {
+    return new Promise((resolve) => {
       queue.push(() => {
-        let responseObj2: Response;
-        resolve2(
-          fetch(response.url, options)
-            .then((response2) => {
-              responseObj2 = response2;
-              return response2.json() as Promise<T>;
-            })
-            .then((result2) => responseMiddleware<T>(resolve, responseObj2, result2, options))
-        );
+        resolve(fetch(response.url, options).then((response2) => responseMiddleware<T>(response2)));
       });
     });
   }
@@ -85,154 +45,111 @@ function responseMiddleware<T>(
     throw new Error(result?.message || 'Error');
   }
 
-  resolve(result);
+  return result;
 }
 
-// function catchMiddleware(err: any) {
-//   return err instanceof SyntaxError || err.type === 'invalid-json'
-//     ? MESSAGES.GENERIC_ERROR_MESSAGE
-//     : err.message;
-// }
-
-function catchMiddleware(err: any, reject: (reason: string) => void) {
-  reject(
-    err instanceof SyntaxError || err.type === 'invalid-json'
-      ? MESSAGES.GENERIC_ERROR_MESSAGE
-      : err.message
-  );
+function catchMiddleware(err: any): string {
+  return err?.message || MESSAGES.GENERIC_ERROR_MESSAGE;
 }
 
-// export async function get<T>(endpoint: string, options: any = {}): Promise<T> {
-//   try {
-//     const opt: RequestInit = {
-//       method: 'GET',
-//       credentials: 'include',
-//       ...options,
-//     };
-//     const response: Response = await fetch(endpoint, opt);
-//     const result: T = await responseMiddleware<T>(response, opt);
-//     return result;
-//   } catch (err: any) {
-//     throw catchMiddleware(err)
-//   }
-// }
-
-export function get<T>(endpoint: string, options: any = {}): Promise<T> {
-  return new Promise((resolve, reject) => {
+export async function get<T>(endpoint: string, options: any = {}): Promise<T> {
+  try {
     const opt: RequestInit = {
       method: 'GET',
       credentials: 'include',
       ...options,
     };
-    let responseObj: Response;
-
-    fetch(endpoint, opt)
-      .then((response) => {
-        responseObj = response;
-        return response.json() as Promise<T>;
-      })
-      .then((result) => responseMiddleware<T>(resolve, responseObj, result, opt))
-      .catch((err) => catchMiddleware(err, reject));
-  });
+    const response: Response = await fetch(endpoint, opt);
+    const result: T = await responseMiddleware<T>(response, opt);
+    return result;
+  } catch (err: unknown) {
+    throw catchMiddleware(err);
+  }
 }
 
-// export function post<T, B>(
-//   endpoint: string,
-//   headers: any = {},
-//   body: B,
-//   isJSON = true,
-//   formData: any = {}
-// ): Promise<T> {
-//   return new Promise((resolve, reject) => {
-//     const customHeaders = isJSON ? { ...jsonHeaders, ...headers } : headers;
-//     const opt: RequestInit = {
-//       method: 'POST',
-//       credentials: 'include',
-//       headers: customHeaders,
-//       body: isJSON ? JSON.stringify(body || {}) : formData,
-//     };
-//     let responseObj: Response;
+export async function post<T, B = any>(
+  endpoint: string,
+  headers: any = {},
+  body: B,
+  isJSON = true,
+  formData: any = {}
+): Promise<T> {
+  try {
+    const customHeaders = isJSON ? { ...jsonHeaders, ...headers } : headers;
+    const opt: RequestInit = {
+      method: 'POST',
+      credentials: 'include',
+      headers: customHeaders,
+      body: isJSON ? JSON.stringify(body || {}) : formData,
+    };
+    const response: Response = await fetch(endpoint, opt);
+    const result: T = await responseMiddleware<T>(response, opt);
+    return result;
+  } catch (err: unknown) {
+    throw catchMiddleware(err);
+  }
+}
 
-//     fetch(endpoint, opt)
-//       .then((response) => {
-//         responseObj = response;
-//         return response.json() as Promise<T>;
-//       })
-//       .then((result) => responseMiddleware<T>(result, resolve, responseObj, opt))
-//       .catch((err) => catchMiddleware(err, reject));
-//   });
-// }
+export async function put<T, B = any>(
+  endpoint: string,
+  headers: any = {},
+  body: B,
+  isJSON = true,
+  formData: any = {}
+): Promise<T> {
+  try {
+    const customHeaders = isJSON ? { ...jsonHeaders, ...headers } : headers;
+    const opt: RequestInit = {
+      method: 'PUT',
+      credentials: 'include',
+      headers: customHeaders,
+      body: isJSON ? JSON.stringify(body || {}) : formData,
+    };
+    const response: Response = await fetch(endpoint, opt);
+    const result: T = await responseMiddleware<T>(response, opt);
+    return result;
+  } catch (err: unknown) {
+    throw catchMiddleware(err);
+  }
+}
 
-// export function put<T, B>(
-//   endpoint: string,
-//   headers: any = {},
-//   body: B,
-//   isJSON = true,
-//   formData: any = {}
-// ): Promise<T> {
-//   return new Promise((resolve, reject) => {
-//     const customHeaders = isJSON ? { ...jsonHeaders, ...headers } : headers;
-//     const opt: RequestInit = {
-//       method: 'PUT',
-//       credentials: 'include',
-//       headers: customHeaders,
-//       body: isJSON ? JSON.stringify(body || {}) : formData,
-//     };
-//     let responseObj: Response;
+export async function patch<T, B = any>(
+  endpoint: string,
+  headers: any = {},
+  body: B,
+  isJSON = true,
+  formData: any = {}
+): Promise<T> {
+  try {
+    const customHeaders = isJSON ? { ...jsonHeaders, ...headers } : headers;
+    const opt: RequestInit = {
+      method: 'PATCH',
+      credentials: 'include',
+      headers: customHeaders,
+      body: isJSON ? JSON.stringify(body || {}) : formData,
+    };
 
-//     fetch(endpoint, opt)
-//       .then((response) => {
-//         responseObj = response;
-//         return response.json() as Promise<T>;
-//       })
-//       .then((result) => responseMiddleware<T>(result, resolve, responseObj, opt))
-//       .catch((err) => catchMiddleware(err, reject));
-//   });
-// }
+    const response: Response = await fetch(endpoint, opt);
+    const result: T = await responseMiddleware<T>(response, opt);
+    return result;
+  } catch (err: unknown) {
+    throw catchMiddleware(err);
+  }
+}
 
-// export function patch<T, B>(
-//   endpoint: string,
-//   headers: any = {},
-//   body: B,
-//   isJSON = true,
-//   formData: any = {}
-// ): Promise<T> {
-//   return new Promise((resolve, reject) => {
-//     const customHeaders = isJSON ? { ...jsonHeaders, ...headers } : headers;
-//     const opt: RequestInit = {
-//       method: 'PATCH',
-//       credentials: 'include',
-//       headers: customHeaders,
-//       body: isJSON ? JSON.stringify(body || {}) : formData,
-//     };
-//     let responseObj: Response;
+export async function del<T>(endpoint: string, headers: any = {}, options: any = {}): Promise<T> {
+  try {
+    const opt: RequestInit = {
+      method: 'DELETE',
+      credentials: 'include',
+      headers,
+      ...options,
+    };
 
-//     fetch(endpoint, opt)
-//       .then((response) => {
-//         responseObj = response;
-//         return response.json() as Promise<T>;
-//       })
-//       .then((result) => responseMiddleware<T>(result, resolve, responseObj, opt))
-//       .catch((err) => catchMiddleware(err, reject));
-//   });
-// }
-
-// export function del<T>(endpoint: string, headers: any = {}, options: any = {}): Promise<T> {
-//   return new Promise((resolve, reject) => {
-//     const opt: RequestInit = {
-//       method: 'DELETE',
-//       credentials: 'include',
-//       headers,
-//       ...options,
-//     };
-//     let responseObj: Response;
-
-//     fetch(endpoint, opt)
-//       .then((response) => {
-//         responseObj = response;
-//         return response.json() as Promise<T>;
-//       })
-//       .then((result) => responseMiddleware<T>(result, resolve, responseObj, opt))
-//       .catch((err) => catchMiddleware(err, reject));
-//   });
-// }
+    const response: Response = await fetch(endpoint, opt);
+    const result: T = await responseMiddleware<T>(response, opt);
+    return result;
+  } catch (err: unknown) {
+    throw catchMiddleware(err);
+  }
+}
