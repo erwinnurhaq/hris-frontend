@@ -31,6 +31,7 @@
 .auth-pages__button {
   height: 2.5rem;
   width: 100%;
+  text-align: center;
 }
 
 /* ==================== LOGIN ==================== */
@@ -64,6 +65,12 @@
 }
 .forgot-password__button-back:not(:hover) {
   color: var(--text-grey);
+}
+
+/* ================ RESET PASSWORD ================ */
+
+.reset-password__button {
+  margin: 1rem 0;
 }
 
 /* ================ SETUP ACCOUNT ================ */

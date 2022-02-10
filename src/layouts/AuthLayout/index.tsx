@@ -11,8 +11,14 @@ function AuthLayout() {
   const [isAuth, setIsAuth] = useState<boolean>(false);
 
   const isMounted = useRef<boolean>(false);
+  const withNotAuthRoute = useRef<string[]>(['auth/login', 'auth/signup']);
 
   const checkAuth = async () => {
+    if (!withNotAuthRoute.current.includes(window.location.pathname)) {
+      setIsAuth(false);
+      setIsLoading(false);
+      return;
+    }
     try {
       setIsLoading(true);
       await userRefresh();

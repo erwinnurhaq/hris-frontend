@@ -13,6 +13,7 @@ import ForgotPassword from '../pages/Auth/ForgotPassword';
 import Dashboard from '../pages/Dashboard';
 import ManageUser from '../pages/Manage/User';
 import NotFound from '../pages/NotFound';
+import ResetPassword from '../pages/Auth/ResetPassword';
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
           <Route path="login" element={<Login />} />
           <Route path="signup" element={<Signup />} />
           <Route path="forgot_password" element={<ForgotPassword />} />
+          <Route path="reset_password" element={<ResetPassword />} />
         </Route>
         <Route path="*" element={<NotFound />} />
       </Routes>

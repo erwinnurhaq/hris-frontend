@@ -9,11 +9,10 @@ export function userRefresh() {
   });
 }
 
-export async function userLogout() {
-  await get<IFetchSuccess>(`${BASE_URL}/auth/logout`, {
+export function userLogout() {
+  return get<IFetchSuccess>(`${BASE_URL}/auth/logout`, {
     headers: { Pragma: 'no-cache', 'Cache-Control': 'no-store' },
   });
-  window.location.replace('/auth/login');
 }
 
 export function userLogin(data: IAuthLoginDto) {
@@ -37,7 +36,7 @@ export function userRequestResetPassword(email: string) {
 }
 
 export function userActivate(token: string) {
-  return post<IFetchSuccess, any>(`${BASE_URL}/auth/activate?token=${token}`, {}, {});
+  return post<IFetchSuccess>(`${BASE_URL}/auth/activate?token=${token}`, {}, {});
 }
 
 export function userActivateResend(token: string) {

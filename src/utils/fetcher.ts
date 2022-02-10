@@ -25,6 +25,7 @@ async function responseMiddleware<T>(response: Response, options?: RequestInit):
     if (response.url.includes('/auth/refresh') || !options) {
       // Logout
       await userLogout();
+      window.location.replace('/auth/login');
       throw new Error(result?.message || 'Error');
     }
 
