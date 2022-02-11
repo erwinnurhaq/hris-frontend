@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
-import { Button, Divider, Input, Spin } from 'antd';
+import { Button, Divider, Input } from 'antd';
 
+import LoaderBlock from '../../../components/Loader/LoaderBlock';
 import { SignupAlertSections } from './components/SignupAlertSections';
 import { IUseSignup } from './signup.interface';
 import useSignup from './useSetupAccount';
@@ -20,11 +21,7 @@ function Signup() {
   }: IUseSignup = useSignup();
 
   if (isInitialLoading) {
-    return (
-      <div className="loading-container-block">
-        <Spin tip="Loading..." />
-      </div>
-    );
+    return <LoaderBlock text="Loading..." />;
   }
 
   if (alertSection) {

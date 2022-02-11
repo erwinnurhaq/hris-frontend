@@ -1,6 +1,5 @@
-import { Spin } from 'antd';
-
 import { ReactComponent as CheckSuccessIcon } from '../../../assets/icons/check-success.svg';
+import LoaderBlock from '../../../components/Loader/LoaderBlock';
 import AlertSection from '../AlertSection';
 import useActivate from './useActivate';
 import '../style.css';
@@ -20,11 +19,7 @@ function Activate() {
     );
   }
 
-  return (
-    <div className="loading-container-block">
-      <Spin tip="Loading..." />
-    </div>
-  );
+  return <LoaderBlock text="Loading..." />;
 }
 
 export default Activate;

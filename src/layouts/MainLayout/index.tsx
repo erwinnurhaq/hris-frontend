@@ -1,16 +1,13 @@
 import { Navigate, Outlet } from 'react-router-dom';
-import { Spin } from 'antd';
+
+import LoaderBlock from '../../components/Loader/LoaderBlock';
 import useMainLayout from './useMainLayout';
 
 function MainLayout() {
   const { isLoading, isAuth } = useMainLayout();
 
   if (isLoading) {
-    return (
-      <div className="loading-container-block" style={{ minHeight: '100vh' }}>
-        <Spin />
-      </div>
-    );
+    return <LoaderBlock style={{ minHeight: '100vh' }} />;
   }
 
   if (!isAuth) {
@@ -18,7 +15,7 @@ function MainLayout() {
   }
 
   return (
-    <div className="main-layout">
+    <div className="main-layout" style={{}}>
       <div>Side bar</div>
       <Outlet />
     </div>

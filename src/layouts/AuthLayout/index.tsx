@@ -1,8 +1,8 @@
 import { Navigate, Outlet } from 'react-router-dom';
-import { Spin } from 'antd';
 
 import AuthLayoutBg from '../../assets/images/auth-layout-bg.jpg';
 import HRISLogo from '../../assets/images/hris-logo.png';
+import LoaderBlock from '../../components/Loader/LoaderBlock';
 import useAuthLayout from './useAuthLayout';
 import './index.css';
 
@@ -10,11 +10,7 @@ function AuthLayout() {
   const { isLoading, isAuth } = useAuthLayout();
 
   if (isLoading) {
-    return (
-      <div className="loading-container-block" style={{ minHeight: '100vh' }}>
-        <Spin />
-      </div>
-    );
+    return <LoaderBlock style={{ minHeight: '100vh' }} />;
   }
 
   if (isAuth) {

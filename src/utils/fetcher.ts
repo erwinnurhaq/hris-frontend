@@ -15,10 +15,7 @@ function refreshAndRetryFetch() {
       // retry fetch
       queue = queue.filter((promise) => promise());
     })
-    .catch((err) => {
-      console.log(err);
-      return userLogout();
-    });
+    .catch(() => userLogout());
 }
 
 async function responseMiddleware<T>(response: Response, options?: RequestInit): Promise<T> {
@@ -27,12 +24,6 @@ async function responseMiddleware<T>(response: Response, options?: RequestInit):
 
   // if the access token is invalid
   if (status === 401 && result?.message === 'Invalid Token') {
-    // if (response.url.includes('/auth/refresh') && !options) {
-    //   // Logout
-    //   await userLogout();
-    //   throw new Error(result?.message || 'Error');
-    // }
-
     if (!isRefreshingToken) {
       // sync
       refreshAndRetryFetch();
