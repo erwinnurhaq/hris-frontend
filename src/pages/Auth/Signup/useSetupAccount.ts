@@ -2,7 +2,9 @@ import { useState, useRef, useEffect, FormEvent } from 'react';
 import { message } from 'antd';
 
 import { userSignup } from '../../../services/auth.service';
-import { IFormDataValues } from '../../../interfaces/common.interface';
+import { TFormElements } from '../../../interfaces/common.interface';
+
+export type TSignupFormElements = 'name' | 'email' | 'school' | 'password' | 'confirmPassword';
 
 export interface IErrorPassInfo {
   password: string;
@@ -48,11 +50,10 @@ function useSignup() {
 
     try {
       setIsLoading(true);
-      const form: FormData = new FormData(ev.target as HTMLFormElement);
-      const values: IFormDataValues = Object.fromEntries(form);
+      const form = ev.currentTarget.elements as TFormElements<TSignupFormElements>;
       const errorPassword: IErrorPassInfo = checkPasswordValid(
-        values.password as string,
-        values.confirmPassword as string
+        form.password.value,
+        form.confirmPassword.value
       );
 
       if (errorPassword.password || errorPassword.confirmPassword) {
@@ -62,15 +63,15 @@ function useSignup() {
       }
 
       await userSignup({
-        name: values.name,
-        email: values.email,
-        password: values.password,
-        school: values.school,
+        name: form.name.value,
+        email: form.email.value,
+        password: form.password.value,
+        school: form.school.value,
       });
 
       if (!isMounted.current) return;
 
-      emailRef.current = values.email as string;
+      emailRef.current = form.email.value;
       message.success('Email successfully sent.');
       setIsSuccess(true);
       setIsLoading(false);

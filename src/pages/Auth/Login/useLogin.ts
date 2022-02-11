@@ -3,7 +3,9 @@ import { NavigateFunction, useNavigate } from 'react-router-dom';
 import { message } from 'antd';
 
 import { userLogin } from '../../../services/auth.service';
-import { IFormDataValues } from '../../../interfaces/common.interface';
+import { TFormElements } from '../../../interfaces/common.interface';
+
+export type TLoginFormElements = 'email' | 'password';
 
 export interface IUseLogin {
   isLoading: boolean;
@@ -20,10 +22,9 @@ function useLogin() {
     ev.preventDefault();
     try {
       setIsLoading(true);
-      const form: FormData = new FormData(ev.target as HTMLFormElement);
-      const values: IFormDataValues = Object.fromEntries(form);
+      const form = ev.currentTarget.elements as TFormElements<TLoginFormElements>;
 
-      await userLogin({ email: values.email, password: values.password });
+      await userLogin({ email: form.email.value, password: form.password.value });
       if (!isMounted.current) return;
 
       setIsLoading(false);

@@ -1,10 +1,10 @@
-import { Role } from '../interfaces/user.interface';
+import { TRole } from '../interfaces/user.interface';
 
 export interface IInviteUserDto {
   name: string;
   email: string;
   schoolId: number;
-  role: Role;
+  role: TRole;
 }
 
 export interface IInvitedSignupDto {

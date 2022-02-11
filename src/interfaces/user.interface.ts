@@ -1,7 +1,7 @@
-export type Role = 'MASTER' | 'ADMIN' | 'USER';
-export type EducationalStage = 'D3' | 'S1' | 'S2';
-export type SchoolLevel = 'SD' | 'SMP' | 'SMA' | 'SMK';
-export type SchoolStatus = 'NEGERI' | 'SWASTA';
+export type TRole = 'MASTER' | 'ADMIN' | 'USER';
+export type TEducationalStage = 'D3' | 'S1' | 'S2';
+export type TSchoolLevel = 'SD' | 'SMP' | 'SMA' | 'SMK';
+export type TSchoolStatus = 'NEGERI' | 'SWASTA';
 
 export interface IClassroom {
   id: number;
@@ -25,7 +25,7 @@ export interface IBankAccount {
 
 export interface ILastEducation {
   id: number;
-  educationalStage: EducationalStage;
+  educationalStage: TEducationalStage;
   major: string;
   campus: string;
   graduateYear: number;
@@ -36,8 +36,8 @@ export interface ISchool {
   id: number;
   name: string;
   address: string;
-  level?: SchoolLevel;
-  type?: SchoolStatus;
+  level?: TSchoolLevel;
+  type?: TSchoolStatus;
   users?: IUser[];
 }
 
@@ -45,7 +45,7 @@ export interface IUser {
   id: number;
   name: string;
   email: string;
-  role: Role;
+  role: TRole;
   address: string;
   createdAt: string;
   verified: string;

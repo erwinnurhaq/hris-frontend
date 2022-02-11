@@ -1,9 +1,11 @@
 import { FormEvent, useEffect, useRef, useState } from 'react';
 import { message } from 'antd';
 
-import { IFormDataValues } from '../../../interfaces/common.interface';
+import { TFormElements } from '../../../interfaces/common.interface';
 import { userResetPassword } from '../../../services/auth.service';
 import { IErrorPassInfo } from '../Signup/useSetupAccount';
+
+export type TResetPasswordFormElements = 'password' | 'confirmPassword';
 
 export interface IUseResetPassword {
   isLoading: boolean;
@@ -52,11 +54,10 @@ function useResetPassword() {
         return;
       }
 
-      const form: FormData = new FormData(ev.target as HTMLFormElement);
-      const values: IFormDataValues = Object.fromEntries(form);
+      const form = ev.currentTarget.elements as TFormElements<TResetPasswordFormElements>;
       const errorPassword: IErrorPassInfo = checkPasswordValid(
-        values.password as string,
-        values.confirmPassword as string
+        form.password.value,
+        form.confirmPassword.value
       );
 
       if (errorPassword.password || errorPassword.confirmPassword) {
@@ -65,7 +66,7 @@ function useResetPassword() {
         return;
       }
 
-      await userResetPassword({ password: values.password, token });
+      await userResetPassword({ password: form.password.value, token });
 
       if (!isMounted.current) return;
 

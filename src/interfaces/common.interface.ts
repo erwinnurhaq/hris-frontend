@@ -1,6 +1,5 @@
-export interface IFormDataValues {
-  [key: string]: any;
-}
+export type TFormElements<U extends string> = HTMLFormControlsCollection &
+  Record<U, HTMLInputElement>;
 
 export interface IFetchSuccess {
   message?: string;
