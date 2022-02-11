@@ -12,7 +12,13 @@ function Login() {
       <h5 className="auth-pages__title">Login</h5>
       <div className="auth-pages__input">
         <p>Email:</p>
-        <Input type="email" name="email" placeholder="Enter your email" required />
+        <Input
+          type="email"
+          name="email"
+          placeholder="Enter your email"
+          disabled={isLoading}
+          required
+        />
       </div>
       <div className="auth-pages__input">
         <p>Password:</p>
@@ -20,11 +26,14 @@ function Login() {
           type="password"
           name="password"
           placeholder="Enter your password"
+          disabled={isLoading}
           required
         />
       </div>
       <div className="login__forgot">
-        <Link to="/auth/forgot_password">Forgot Password</Link>
+        <Link to="/auth/forgotpassword" style={{ pointerEvents: isLoading ? 'none' : 'all' }}>
+          Forgot Password
+        </Link>
       </div>
       <Button
         htmlType="submit"
@@ -36,7 +45,10 @@ function Login() {
       </Button>
       <div>
         <p>
-          No account? <Link to="/auth/signup">Sign Up</Link>
+          No account?{' '}
+          <Link to="/auth/signup" style={{ pointerEvents: isLoading ? 'none' : 'all' }}>
+            Sign Up
+          </Link>
         </p>
       </div>
     </form>

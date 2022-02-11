@@ -7,13 +7,14 @@ import MainLayout from '../layouts/MainLayout';
 // Auth Pages
 import Login from '../pages/Auth/Login';
 import Signup from '../pages/Auth/Signup';
+import Activate from '../pages/Auth/Activate';
 import ForgotPassword from '../pages/Auth/ForgotPassword';
+import ResetPassword from '../pages/Auth/ResetPassword';
 
 // Main Pages
 import Dashboard from '../pages/Dashboard';
 import ManageUser from '../pages/Manage/User';
 import NotFound from '../pages/NotFound';
-import ResetPassword from '../pages/Auth/ResetPassword';
 
 function App() {
   return (
@@ -31,8 +32,9 @@ function App() {
           <Route path="" element={<Navigate to="/auth/login" />} />
           <Route path="login" element={<Login />} />
           <Route path="signup" element={<Signup />} />
-          <Route path="forgot_password" element={<ForgotPassword />} />
-          <Route path="reset_password" element={<ResetPassword />} />
+          <Route path="activate" element={<Activate />} />
+          <Route path="forgotpassword" element={<ForgotPassword />} />
+          <Route path="resetpassword" element={<ResetPassword />} />
         </Route>
         <Route path="*" element={<NotFound />} />
       </Routes>

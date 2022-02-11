@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect, FormEvent } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { message } from 'antd';
 
 import { TFormElements } from '../../../interfaces/common.interface';
@@ -8,9 +9,12 @@ export interface IUseForgotPassword {
   isLoading: boolean;
   isSuccess: boolean;
   onSendRequest: (ev: FormEvent<HTMLFormElement>) => Promise<void> | void;
+  onGoToLogin: () => void;
 }
 
 function useForgotPassword() {
+  const navigate = useNavigate();
+
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isSuccess, setIsSuccess] = useState<boolean>(false);
 
@@ -38,6 +42,10 @@ function useForgotPassword() {
     }
   }
 
+  function onGoToLogin() {
+    navigate('/auth/login');
+  }
+
   useEffect(() => {
     isMounted.current = true;
     return () => {
@@ -49,6 +57,7 @@ function useForgotPassword() {
     isLoading,
     isSuccess,
     onSendRequest,
+    onGoToLogin,
   };
 }
 

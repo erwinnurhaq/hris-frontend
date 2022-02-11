@@ -24,7 +24,7 @@ function useResetPassword() {
   });
 
   const isMounted = useRef<boolean>(false);
-  const paramsRef = useRef<URLSearchParams | undefined>(undefined);
+  const tokenRef = useRef<string | null>(null);
 
   function checkPasswordValid(password: string, confirmPassword: string) {
     const currentError: IErrorPassInfo = {
@@ -43,16 +43,13 @@ function useResetPassword() {
   async function onReset(ev: FormEvent<HTMLFormElement>) {
     if (ev.preventDefault) ev.preventDefault();
     if (isLoading) return;
+    if (!tokenRef.current) {
+      message.error('Token is required');
+      return;
+    }
 
     try {
       setIsLoading(true);
-      const token = paramsRef.current?.get('token');
-
-      if (!token) {
-        message.error('Token is required');
-        setIsLoading(false);
-        return;
-      }
 
       const form = ev.currentTarget.elements as TFormElements<TResetPasswordFormElements>;
       const errorPassword: IErrorPassInfo = checkPasswordValid(
@@ -66,7 +63,7 @@ function useResetPassword() {
         return;
       }
 
-      await userResetPassword({ password: form.password.value, token });
+      await userResetPassword({ password: form.password.value, token: tokenRef.current });
 
       if (!isMounted.current) return;
 
@@ -87,7 +84,7 @@ function useResetPassword() {
 
   useEffect(() => {
     isMounted.current = true;
-    paramsRef.current = new URLSearchParams(window.location.search);
+    tokenRef.current = new URLSearchParams(window.location.search).get('token');
     return () => {
       isMounted.current = false;
     };

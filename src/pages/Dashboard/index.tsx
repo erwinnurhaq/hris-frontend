@@ -1,13 +1,11 @@
-import { NavigateFunction, useNavigate } from 'react-router-dom';
 import { Button, message } from 'antd';
 import { get } from '../../utils/fetcher';
+import { userLogout } from '../../services/auth.service';
 
 const Dashboard = () => {
-  const navigate: NavigateFunction = useNavigate();
   async function onLogout() {
     try {
-      await fetch('http://localhost:2000/auth/logout', { credentials: 'include' });
-      navigate('/auth/login');
+      await userLogout();
     } catch (err) {
       console.log(err);
     }

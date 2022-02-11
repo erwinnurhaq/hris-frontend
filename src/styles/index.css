@@ -37,6 +37,7 @@ body {
 }
 
 @import './animations.css';
+@import './loading.css';
 
 /* ============== ANTD OVERRIDES ============== */
 

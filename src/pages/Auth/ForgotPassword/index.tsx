@@ -7,17 +7,16 @@ import useForgotPassword, { IUseForgotPassword } from './useForgotPassword';
 import '../style.css';
 
 function ForgotPassword() {
-  const { isLoading, isSuccess, onSendRequest }: IUseForgotPassword = useForgotPassword();
+  const { isLoading, isSuccess, onSendRequest, onGoToLogin }: IUseForgotPassword =
+    useForgotPassword();
 
   if (isSuccess) {
     return (
       <AlertSection
-        className="forgot-password__email-sent"
         title="Email Sent"
         description="We have emailed you a link to reset your password."
-        buttonLabel="Resend Link"
-        onButtonClick={onSendRequest}
-        isLoading={isLoading}
+        buttonLabel="Go to Login"
+        onButtonClick={onGoToLogin}
         icon={<EmailIcon />}
       />
     );
@@ -32,7 +31,13 @@ function ForgotPassword() {
       </p>
       <div className="auth-pages__input">
         <p>Email:</p>
-        <Input type="email" name="email" placeholder="Enter your email" required />
+        <Input
+          type="email"
+          name="email"
+          placeholder="Enter your email"
+          disabled={isLoading}
+          required
+        />
       </div>
       <Button
         htmlType="submit"
@@ -42,7 +47,11 @@ function ForgotPassword() {
       >
         Send Request
       </Button>
-      <Link className="auth-pages__button forgot-password__button-back" to="/auth/login">
+      <Link
+        className="auth-pages__button forgot-password__button-back"
+        to="/auth/login"
+        style={{ pointerEvents: isLoading ? 'none' : 'all' }}
+      >
         Back to Login
       </Link>
     </form>

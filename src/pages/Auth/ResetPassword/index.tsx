@@ -1,5 +1,6 @@
 import { Button, Input } from 'antd';
 
+import { ReactComponent as CheckSuccessIcon } from '../../../assets/icons/check-success.svg';
 import AlertSection from '../AlertSection';
 import useResetPassword, { IUseResetPassword } from './useResetPassword';
 
@@ -14,7 +15,7 @@ function ResetPassword() {
         description="You can now login with your new password."
         buttonLabel="Go to Login"
         onButtonClick={onGoToLogin}
-        isLoading={isLoading}
+        icon={<CheckSuccessIcon />}
       />
     );
   }
@@ -28,6 +29,7 @@ function ResetPassword() {
           type="password"
           name="password"
           placeholder="Enter your new password"
+          disabled={isLoading}
           required
         />
         {error.password && <small>* {error.password}</small>}
@@ -38,6 +40,7 @@ function ResetPassword() {
           type="password"
           name="confirmPassword"
           placeholder="Confirm your password"
+          disabled={isLoading}
           required
         />
         {error.confirmPassword && <small>* {error.confirmPassword}</small>}
