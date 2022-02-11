@@ -1,11 +1,9 @@
 import { Link } from 'react-router-dom';
 import { Button, Divider, Input, Spin } from 'antd';
 
-import { ReactComponent as EmailIcon } from '../../../assets/icons/email-sent.svg';
-import { ReactComponent as CheckSuccessIcon } from '../../../assets/icons/check-success.svg';
-import { ReactComponent as InfoIcon } from '../../../assets/icons/info-icon.svg';
-import AlertSection from '../AlertSection';
-import useSignup, { IUseSignup, SignupAlertSection } from './useSetupAccount';
+import { SignupAlertSections } from './components/SignupAlertSections';
+import { IUseSignup } from './signup.interface';
+import useSignup from './useSetupAccount';
 import '../style.css';
 
 function Signup() {
@@ -19,7 +17,6 @@ function Signup() {
     error,
     onRegister,
     onResendActivation,
-    onGoToLogin,
   }: IUseSignup = useSignup();
 
   if (isInitialLoading) {
@@ -30,39 +27,12 @@ function Signup() {
     );
   }
 
-  if (alertSection === SignupAlertSection.SUCCESS_SIGNUP) {
+  if (alertSection) {
     return (
-      <AlertSection
-        title="Email Sent"
-        description="Please check your email box to continue the registration."
-        buttonLabel="Resend Link"
-        onButtonClick={onResendActivation}
+      <SignupAlertSections
+        alertSection={alertSection}
+        onResendActivation={onResendActivation}
         isLoading={isLoading}
-        icon={<EmailIcon />}
-      />
-    );
-  }
-
-  if (alertSection === SignupAlertSection.SUCCESS_INVITED_SIGNUP) {
-    return (
-      <AlertSection
-        title="Success"
-        description="User data is saved. Now you can login with your email and password."
-        buttonLabel="Go to Login"
-        onButtonClick={onGoToLogin}
-        icon={<CheckSuccessIcon />}
-      />
-    );
-  }
-
-  if (alertSection === SignupAlertSection.ERROR_INVITED_DATA) {
-    return (
-      <AlertSection
-        title="Error"
-        description="Token is invalid or expired. Please contact your school administrator."
-        buttonLabel="Go to Login"
-        onButtonClick={onGoToLogin}
-        icon={<InfoIcon width={100} height={100} />}
       />
     );
   }

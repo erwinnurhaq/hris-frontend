@@ -1,16 +1,9 @@
-import { useState, useRef, useEffect, FormEvent } from 'react';
+import { FormEvent, useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { message } from 'antd';
 
 import { TFormElements } from '../../../interfaces/common.interface';
 import { userRequestResetPassword } from '../../../services/auth.service';
-
-export interface IUseForgotPassword {
-  isLoading: boolean;
-  isSuccess: boolean;
-  onSendRequest: (ev: FormEvent<HTMLFormElement>) => Promise<void> | void;
-  onGoToLogin: () => void;
-}
 
 function useForgotPassword() {
   const navigate = useNavigate();

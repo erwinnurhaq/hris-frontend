@@ -1,18 +1,7 @@
-import { ReactNode } from 'react';
 import { Button } from 'antd';
 
+import { IAlertSection } from './alertsection.interface';
 import '../style.css';
-
-export interface IAlertSection {
-  className?: string;
-  icon?: ReactNode;
-  title: string;
-  description: string;
-  isShowButton?: boolean;
-  buttonLabel?: string;
-  onButtonClick?: (ev?: any) => Promise<void> | void;
-  isLoading?: boolean;
-}
 
 function AlertSection({
   className,

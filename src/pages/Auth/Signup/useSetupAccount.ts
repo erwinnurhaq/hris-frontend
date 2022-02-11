@@ -1,11 +1,16 @@
-import { useState, useRef, useEffect, FormEvent, RefObject } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { FormEvent, useEffect, useRef, useState } from 'react';
 import { message } from 'antd';
 
 import { userActivateResend, userSignup } from '../../../services/auth.service';
 import { getInvitedUserData, invitedSignup } from '../../../services/user.service';
 import { TFormElements } from '../../../interfaces/common.interface';
 import { IInvitedUserData } from '../../../interfaces/user.interface';
+import {
+  IErrorPassInfo,
+  IUserRef,
+  TSignupAlertSection,
+  TSignupFormElements,
+} from './signup.interface';
 
 export enum SignupAlertSection {
   SUCCESS_SIGNUP = 'success_signup',
@@ -13,41 +18,7 @@ export enum SignupAlertSection {
   ERROR_INVITED_DATA = 'error_invited_data',
 }
 
-export type TSignupAlertSection =
-  | 'success_signup'
-  | 'success_invited_signup'
-  | 'error_invited_data'
-  | undefined;
-
-export type TSignupFormElements = 'name' | 'email' | 'school' | 'password' | 'confirmPassword';
-
-export interface IErrorPassInfo {
-  password: string;
-  confirmPassword: string;
-}
-
-export interface IUserRef {
-  email?: string;
-  name?: string;
-  school?: string;
-}
-
-export interface IUseSignup {
-  userRef: RefObject<IUserRef | undefined>;
-  formRef: RefObject<HTMLFormElement>;
-  isInitialLoading: boolean;
-  isLoading: boolean;
-  isInvited: boolean;
-  alertSection: TSignupAlertSection;
-  error: IErrorPassInfo;
-  onRegister: (ev: FormEvent<HTMLFormElement>) => Promise<void>;
-  onResendActivation: () => Promise<void>;
-  onGoToLogin: () => void;
-}
-
 function useSignup() {
-  const navigate = useNavigate();
-
   const [isInitialLoading, setIsInitialLoading] = useState<boolean>(true);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isInvited, setIsInvited] = useState<boolean>(false);
@@ -141,10 +112,6 @@ function useSignup() {
     }
   }
 
-  function onGoToLogin() {
-    navigate('/auth/login');
-  }
-
   async function initialCheck() {
     if (!tokenRef.current) {
       setIsInitialLoading(false);
@@ -186,7 +153,6 @@ function useSignup() {
     error,
     onRegister,
     onResendActivation,
-    onGoToLogin,
   };
 }
 

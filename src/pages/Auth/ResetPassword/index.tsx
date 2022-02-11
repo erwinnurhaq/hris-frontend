@@ -2,7 +2,9 @@ import { Button, Input } from 'antd';
 
 import { ReactComponent as CheckSuccessIcon } from '../../../assets/icons/check-success.svg';
 import AlertSection from '../AlertSection';
-import useResetPassword, { IUseResetPassword } from './useResetPassword';
+import useResetPassword from './useResetPassword';
+import { IUseResetPassword } from './resetpassword.interface';
+import '../style.css';
 
 function ResetPassword() {
   const { isLoading, isSuccess, error, onReset, onGoToLogin }: IUseResetPassword =

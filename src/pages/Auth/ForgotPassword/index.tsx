@@ -3,7 +3,8 @@ import { Button, Input } from 'antd';
 
 import { ReactComponent as EmailIcon } from '../../../assets/icons/email-sent.svg';
 import AlertSection from '../AlertSection';
-import useForgotPassword, { IUseForgotPassword } from './useForgotPassword';
+import useForgotPassword from './useForgotPassword';
+import { IUseForgotPassword } from './forgotpassword.interface';
 import '../style.css';
 
 function ForgotPassword() {

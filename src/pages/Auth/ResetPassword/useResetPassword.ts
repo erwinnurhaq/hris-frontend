@@ -3,17 +3,8 @@ import { message } from 'antd';
 
 import { TFormElements } from '../../../interfaces/common.interface';
 import { userResetPassword } from '../../../services/auth.service';
-import { IErrorPassInfo } from '../Signup/useSetupAccount';
-
-export type TResetPasswordFormElements = 'password' | 'confirmPassword';
-
-export interface IUseResetPassword {
-  isLoading: boolean;
-  isSuccess: boolean;
-  error: IErrorPassInfo;
-  onReset: (ev: FormEvent<HTMLFormElement>) => Promise<void>;
-  onGoToLogin: () => void;
-}
+import { IErrorPassInfo } from '../Signup/signup.interface';
+import { TResetPasswordFormElements } from './resetpassword.interface';
 
 function useResetPassword() {
   const [isLoading, setIsLoading] = useState<boolean>(false);

@@ -1,7 +1,8 @@
 import { Link } from 'react-router-dom';
 import { Button, Input } from 'antd';
 
-import useLogin, { IUseLogin } from './useLogin';
+import useLogin from './useLogin';
+import { IUseLogin } from './login.interface';
 import '../style.css';
 
 function Login() {

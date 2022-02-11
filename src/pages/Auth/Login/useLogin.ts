@@ -1,16 +1,10 @@
-import { useEffect, useRef, useState, FormEvent } from 'react';
+import { FormEvent, useEffect, useRef, useState } from 'react';
 import { NavigateFunction, useNavigate } from 'react-router-dom';
 import { message } from 'antd';
 
 import { userLogin } from '../../../services/auth.service';
 import { TFormElements } from '../../../interfaces/common.interface';
-
-export type TLoginFormElements = 'email' | 'password';
-
-export interface IUseLogin {
-  isLoading: boolean;
-  onLogin: (ev: FormEvent<HTMLFormElement>) => void;
-}
+import { TLoginFormElements } from './login.interface';
 
 function useLogin() {
   const navigate: NavigateFunction = useNavigate();
