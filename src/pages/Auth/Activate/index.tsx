@@ -11,10 +11,6 @@ function Activate() {
   const [isUserActivated, setIsUserActivated] = useState<boolean>(false);
   const isMounted = useRef<boolean>(false);
 
-  function goToLogin() {
-    navigate('/auth/login');
-  }
-
   async function initActivate() {
     try {
       const token = new URLSearchParams(window.location.search).get('token');
@@ -30,12 +26,8 @@ function Activate() {
     } catch (err: unknown) {
       if (!isMounted.current) return;
 
-      if (err === 'User is already verified') {
-        return setIsUserActivated(true);
-      }
-
-      message.error('Token is invalid or expired.');
-      goToLogin();
+      message.error(err === 'User is already verified' ? err : 'Token is invalid or expired.');
+      navigate('/');
     }
   }
 
@@ -53,7 +45,7 @@ function Activate() {
         title="User Activated"
         description="Now you can login with your email and password."
         buttonLabel="Go to Login"
-        onButtonClick={goToLogin}
+        onButtonClick={() => navigate('/')}
         icon={<CheckSuccessIcon />}
       />
     );

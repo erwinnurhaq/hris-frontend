@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { Navigate, Outlet } from 'react-router-dom';
+import { Spin } from 'antd';
 import { userRefresh } from '../../services/auth.service';
 
 function MainLayout() {
@@ -35,7 +36,11 @@ function MainLayout() {
   }, []);
 
   if (isLoading) {
-    return <div>Loading</div>;
+    return (
+      <div className="loading-container-block" style={{ minHeight: '100vh' }}>
+        <Spin />
+      </div>
+    );
   }
 
   if (!isAuth) {

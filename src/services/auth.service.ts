@@ -2,16 +2,30 @@ import { BASE_URL } from '../constants/baseURL';
 import { get, post } from '../utils/fetcher';
 import { IFetchSuccess } from '../interfaces/common.interface';
 import { IAuthLoginDto, IAuthResetPassDto, IAuthSignupDto } from './auth.dto';
+import MESSAGES from '../constants/genericMessages.json';
 
-export function userRefresh() {
-  return get<IFetchSuccess>(`${BASE_URL}/auth/refresh`, {
-    headers: { Pragma: 'no-cache', 'Cache-Control': 'no-store' },
-  });
+export async function userRefresh() {
+  try {
+    const res = await fetch(`${BASE_URL}/auth/refresh`, {
+      method: 'GET',
+      credentials: 'include',
+      headers: { Pragma: 'no-cache', 'Cache-Control': 'no-store' },
+    });
+    const resJson = await res.json();
+    if (res.status !== 200) {
+      throw new Error(resJson.message);
+    }
+    return true;
+  } catch (err: any) {
+    throw err?.message || MESSAGES.GENERIC_ERROR_MESSAGE;
+  }
 }
 
 export function userLogout() {
   return get<IFetchSuccess>(`${BASE_URL}/auth/logout`, {
     headers: { Pragma: 'no-cache', 'Cache-Control': 'no-store' },
+  }).then(() => {
+    window.location.replace('/auth/login');
   });
 }
 

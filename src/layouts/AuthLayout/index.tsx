@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { Navigate, Outlet } from 'react-router-dom';
+import { Spin } from 'antd';
 
 import AuthLayoutBg from '../../assets/images/auth-layout-bg.jpg';
 import HRISLogo from '../../assets/images/hris-logo.png';
@@ -11,14 +12,15 @@ function AuthLayout() {
   const [isAuth, setIsAuth] = useState<boolean>(false);
 
   const isMounted = useRef<boolean>(false);
-  const withNotAuthRoute = useRef<string[]>(['auth/login', 'auth/signup']);
+  const withNotAuthRoute = ['/auth/login', '/auth/signup'];
 
   const checkAuth = async () => {
-    if (!withNotAuthRoute.current.includes(window.location.pathname)) {
+    if (!withNotAuthRoute.includes(window.location.pathname)) {
       setIsAuth(false);
       setIsLoading(false);
       return;
     }
+
     try {
       setIsLoading(true);
       await userRefresh();
@@ -45,7 +47,11 @@ function AuthLayout() {
   }, []);
 
   if (isLoading) {
-    return <div>Loading</div>;
+    return (
+      <div className="loading-container-block" style={{ minHeight: '100vh' }}>
+        <Spin />
+      </div>
+    );
   }
 
   if (isAuth) {
