@@ -16,7 +16,7 @@ function Login() {
         <Input
           type="email"
           name="email"
-          placeholder="Enter your email"
+          placeholder="Masukkan email anda"
           disabled={isLoading}
           required
         />
@@ -26,14 +26,14 @@ function Login() {
         <Input.Password
           type="password"
           name="password"
-          placeholder="Enter your password"
+          placeholder="Masukkan password anda"
           disabled={isLoading}
           required
         />
       </div>
       <div className="login__forgot">
         <Link to="/auth/forgotpassword" style={{ pointerEvents: isLoading ? 'none' : 'all' }}>
-          Forgot Password
+          Lupa Password
         </Link>
       </div>
       <Button
@@ -42,13 +42,13 @@ function Login() {
         className="auth-pages__button login__button"
         loading={isLoading}
       >
-        Login
+        Masuk
       </Button>
       <div>
         <p>
-          No account?{' '}
+          Tidak punya akun?{' '}
           <Link to="/auth/signup" style={{ pointerEvents: isLoading ? 'none' : 'all' }}>
-            Sign Up
+            Daftar
           </Link>
         </p>
       </div>

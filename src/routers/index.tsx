@@ -15,6 +15,7 @@ import ResetPassword from '../pages/Auth/ResetPassword';
 import Dashboard from '../pages/Dashboard';
 import ManageUser from '../pages/Manage/User';
 import NotFound from '../pages/NotFound';
+import Welcome from '../pages/Welcome';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
       <Routes>
         <Route path="/" element={<MainLayout />}>
           <Route path="" element={<Navigate to="/dashboard" />} />
+          <Route path="welcome" element={<Welcome />} />
           <Route path="dashboard" element={<Dashboard />} />
           <Route path="manage" element={<Outlet />}>
             <Route path="" element={<Navigate to="/manage/user" />} />

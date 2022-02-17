@@ -1,0 +1,31 @@
+.welcome-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 0.75rem;
+}
+
+.welcome-card {
+  width: 100%;
+  max-width: 30rem;
+}
+
+.welcome-card .ant-card-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.welcome-card .ant-card-body form {
+  width: 100%;
+  padding: 1rem 0;
+}
+
+.welcome-save-button {
+  height: 2.5rem;
+  width: 100%;
+  margin-top: 2rem;
+}

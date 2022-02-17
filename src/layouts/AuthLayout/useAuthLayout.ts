@@ -8,7 +8,7 @@ function useAuthLayout() {
   const isMounted = useRef<boolean>(false);
   const withNotAuthRoute = ['/auth/login', '/auth/signup'];
 
-  const checkAuth = async () => {
+  async function checkAuth() {
     if (!withNotAuthRoute.includes(window.location.pathname)) {
       setIsAuth(false);
       setIsLoading(false);
@@ -28,7 +28,7 @@ function useAuthLayout() {
       setIsAuth(false);
       setIsLoading(false);
     }
-  };
+  }
 
   useEffect(() => {
     console.log('mounted auth layout');

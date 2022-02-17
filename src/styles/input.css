@@ -1,0 +1,17 @@
+.input-container {
+  margin: 0.5rem 0;
+  width: 100%;
+}
+
+.input-container p {
+  margin: 0;
+  padding-bottom: 0.25rem;
+}
+
+.input-container small {
+  color: var(--danger);
+}
+
+.input-container .ant-select {
+  width: 100%;
+}

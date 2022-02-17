@@ -14,9 +14,9 @@ function ForgotPassword() {
   if (isSuccess) {
     return (
       <AlertSection
-        title="Email Sent"
-        description="We have emailed you a link to reset your password."
-        buttonLabel="Go to Login"
+        title="Email Terkirim"
+        description="Kami sudah mengirimkan email link untuk mereset password anda."
+        buttonLabel="Kembali ke Login"
         onButtonClick={onGoToLogin}
         icon={<EmailIcon />}
       />
@@ -25,17 +25,17 @@ function ForgotPassword() {
 
   return (
     <form className="auth-pages-container animation-fade-in-top" onSubmit={onSendRequest}>
-      <h5 className="auth-pages__title forgot-password__title">Recover Password</h5>
+      <h5 className="auth-pages__title forgot-password__title">Lupa Password</h5>
       <p className="forgot-password__subtitle">
-        Enter your email address and we&apos;ll send you an email with instructions to reset your
-        password.
+        Silahkan masukkan email anda dan kami akan mengirimkan email beserta instruksi untuk mereset
+        password anda.
       </p>
       <div className="auth-pages__input">
         <p>Email:</p>
         <Input
           type="email"
           name="email"
-          placeholder="Enter your email"
+          placeholder="Masukkan email terdaftar anda"
           disabled={isLoading}
           required
         />
@@ -46,14 +46,14 @@ function ForgotPassword() {
         className="auth-pages__button forgot-password__button-send"
         loading={isLoading}
       >
-        Send Request
+        Kirim Request
       </Button>
       <Link
         className="auth-pages__button forgot-password__button-back"
         to="/auth/login"
         style={{ pointerEvents: isLoading ? 'none' : 'all' }}
       >
-        Back to Login
+        Kembali to Login
       </Link>
     </form>
   );

@@ -1,9 +1,9 @@
 import { BASE_URL } from '../constants/baseURL';
-import { get, post } from '../utils/fetcher';
+import { del, get, patch, post } from '../utils/fetcher';
 import getQueryString from '../utils/getQueryString';
 import { IFetchSuccess, IPaginationDto } from '../interfaces/common.interface';
 import { IInvitedUserData, IUser, IUserDetail } from '../interfaces/user.interface';
-import { IInvitedSignupDto, IInviteUserDto } from './user.dto';
+import { IInvitedSignupDto, IInviteUserDto, IPatchMeDto, IPatchUserDto } from './user.dto';
 
 export function getUsers(query: IPaginationDto) {
   return get<IUser[]>(`${BASE_URL}/users${getQueryString(query)}`);
@@ -11,6 +11,14 @@ export function getUsers(query: IPaginationDto) {
 
 export function getUserDetail(id: number) {
   return get<IUserDetail>(`${BASE_URL}/users/${id}`);
+}
+
+export function patchUser(id: number, data: IPatchUserDto) {
+  return patch<IUser, IPatchUserDto>(`${BASE_URL}/users/${id}`, {}, data);
+}
+
+export function deleteUser(id: number) {
+  return del<IFetchSuccess>(`${BASE_URL}/users/${id}`);
 }
 
 export function inviteUser(data: IInviteUserDto) {
@@ -31,4 +39,12 @@ export function invitedSignup(data: IInvitedSignupDto) {
     {},
     { password: data.password }
   );
+}
+
+export function getMe() {
+  return get<IUserDetail>(`${BASE_URL}/users/me`);
+}
+
+export function patchMe(data: IPatchMeDto) {
+  return patch<IUserDetail, IPatchMeDto>(`${BASE_URL}/users/me`, {}, data);
 }
