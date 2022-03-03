@@ -4,7 +4,7 @@ import getQueryString from 'utils/getQueryString';
 import { IFetchSuccess, IPaginationDto } from 'interfaces/common.interface';
 import { IInvitedUserData, IUser, IUserDetail } from 'interfaces/user.interface';
 
-import { IInvitedSignupDto, IInviteUserDto, IPatchMeDto, IPatchUserDto } from './user.dto';
+import { IInvitedSignupDto, IInviteUserDto, IPatchUserDto } from './user.dto';
 
 export function getUsers(query: IPaginationDto) {
   return get<IUser[]>(`${BASE_URL}/users${getQueryString(query)}`);
@@ -40,12 +40,4 @@ export function invitedSignup(data: IInvitedSignupDto) {
     {},
     { password: data.password }
   );
-}
-
-export function getMe() {
-  return get<IUserDetail>(`${BASE_URL}/users/me`);
-}
-
-export function patchMe(data: IPatchMeDto) {
-  return patch<IUserDetail, IPatchMeDto>(`${BASE_URL}/users/me`, {}, data);
 }

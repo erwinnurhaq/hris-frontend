@@ -3,7 +3,7 @@ import { useLocation } from 'react-router-dom';
 import { message } from 'antd';
 
 import { userRefresh } from 'services/auth.service';
-import { getMe } from 'services/user.service';
+import { getMe } from 'services/me.service';
 
 import { MainLayoutContext } from '../MainLayoutContext';
 
