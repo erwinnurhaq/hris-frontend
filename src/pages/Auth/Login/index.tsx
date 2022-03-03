@@ -48,7 +48,7 @@ function Login() {
         <p>
           Tidak punya akun?{' '}
           <Link to="/auth/signup" style={{ pointerEvents: isLoading ? 'none' : 'all' }}>
-            Daftar
+            Registrasi
           </Link>
         </p>
       </div>

@@ -104,7 +104,7 @@ function Signup() {
         className="auth-pages__button signup__button"
         loading={isLoading}
       >
-        Register
+        Daftar
       </Button>
       <Link
         className="auth-pages__button signup__back-button"
