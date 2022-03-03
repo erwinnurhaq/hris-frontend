@@ -1,5 +1,6 @@
-import { ReactComponent as CheckSuccessIcon } from '../../../assets/icons/check-success.svg';
-import LoaderBlock from '../../../components/Loader/LoaderBlock';
+import { ReactComponent as CheckSuccessIcon } from 'assets/icons/check-success.svg';
+import LoaderBlock from 'components/Loader/LoaderBlock';
+
 import AlertSection from '../AlertSection';
 import useActivate from './useActivate';
 import '../style.css';
@@ -10,9 +11,9 @@ function Activate() {
   if (isUserActivated) {
     return (
       <AlertSection
-        title="User Activated"
-        description="Now you can login with your email and password."
-        buttonLabel="Go to Login"
+        title="User Telah Aktif"
+        description="Sekarang anda bisa login menggunakan email dan password."
+        buttonLabel="Ke Login"
         onButtonClick={() => navigate('/')}
         icon={<CheckSuccessIcon />}
       />

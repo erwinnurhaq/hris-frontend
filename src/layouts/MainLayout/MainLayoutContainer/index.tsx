@@ -1,6 +1,7 @@
 import { Navigate } from 'react-router-dom';
 
-import LoaderBlock from '../../../components/Loader/LoaderBlock';
+import LoaderBlock from 'components/Loader/LoaderBlock';
+
 import Sidebar from './components/Sidebar';
 import useMainLayout from './useMainLayout';
 import './style.css';

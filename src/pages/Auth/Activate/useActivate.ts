@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import { useEffect, useRef, useState } from 'react';
 import { message } from 'antd';
 
-import { userActivate } from '../../../services/auth.service';
+import { userActivate } from 'services/auth.service';
 
 function useActivate() {
   const navigate = useNavigate();
@@ -14,17 +14,21 @@ function useActivate() {
       const token = new URLSearchParams(window.location.search).get('token');
 
       if (!token) {
-        return message.error('Token is required.');
+        return message.error('Token diperlukan.');
       }
       await userActivate(token);
       if (!isMounted.current) return;
 
-      message.success('Successfully activated.');
+      message.success('Sukses Aktivasi.');
       setIsUserActivated(true);
     } catch (err: unknown) {
       if (!isMounted.current) return;
 
-      message.error(err === 'User is already verified' ? err : 'Token is invalid or expired.');
+      message.error(
+        err === 'User is already verified'
+          ? 'User telah terverifikasi.'
+          : 'Token tidak valid atau kedaluwarsa.'
+      );
       navigate('/');
     }
   }

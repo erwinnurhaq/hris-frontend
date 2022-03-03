@@ -1,7 +1,8 @@
 import { Link } from 'react-router-dom';
 import { Button, Divider, Input } from 'antd';
 
-import LoaderBlock from '../../../components/Loader/LoaderBlock';
+import LoaderBlock from 'components/Loader/LoaderBlock';
+
 import { SignupAlertSections } from './components/SignupAlertSections';
 import { IUseSignup } from './signup.interface';
 import useSignup from './useSetupAccount';
@@ -40,12 +41,12 @@ function Signup() {
       ref={formRef}
       onSubmit={onRegister}
     >
-      <h5 className="auth-pages__title signup__title">Register</h5>
+      <h5 className="auth-pages__title signup__title">Registrasi</h5>
       <div className="auth-pages__input">
-        <p>Name:</p>
+        <p>Nama:</p>
         <Input
           name="name"
-          placeholder="Enter your full name"
+          placeholder="Masukkan nama lengkap anda"
           defaultValue={userRef.current?.name || ''}
           disabled={isInvited || isLoading}
           required
@@ -56,42 +57,42 @@ function Signup() {
         <Input
           type="email"
           name="email"
-          placeholder="Enter your email"
+          placeholder="Masukkan email"
           defaultValue={userRef.current?.email || ''}
           disabled={isInvited || isLoading}
           required
         />
       </div>
       <div className="auth-pages__input">
-        <p>School Name:</p>
+        <p>Nama Sekolah:</p>
         <Input
           name="school"
-          placeholder="Enter your school name"
+          placeholder="Masukkan nama sekolah"
           defaultValue={userRef.current?.school || ''}
           disabled={isInvited || isLoading}
           required
         />
       </div>
       <Divider plain>
-        <h4 className="signup__subtitle">Create Password</h4>
+        <h4 className="signup__subtitle">Buat Password</h4>
       </Divider>
       <div className="auth-pages__input">
         <p>Password:</p>
         <Input.Password
           type="password"
           name="password"
-          placeholder="Enter your password"
+          placeholder="Masukkan password"
           disabled={isLoading}
           required
         />
         {error.password && <small>* {error.password}</small>}
       </div>
       <div className="auth-pages__input">
-        <p>Confirm Password:</p>
+        <p>Konfirm Password:</p>
         <Input.Password
           type="password"
           name="confirmPassword"
-          placeholder="Confirm your password"
+          placeholder="Masukkan konfirm password"
           disabled={isLoading}
           required
         />
@@ -110,7 +111,7 @@ function Signup() {
         to="/auth/login"
         style={{ pointerEvents: isLoading ? 'none' : 'all' }}
       >
-        Back to Login
+        Kembali ke Login
       </Link>
     </form>
   );

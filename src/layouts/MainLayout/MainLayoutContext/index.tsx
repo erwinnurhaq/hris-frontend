@@ -1,5 +1,6 @@
 import { createContext, Dispatch, useReducer } from 'react';
-import { IUserDetail } from '../../../interfaces/user.interface';
+
+import { IUserDetail } from 'interfaces/user.interface';
 
 // Type / Interface
 type TInitialState = { me: IUserDetail | undefined };

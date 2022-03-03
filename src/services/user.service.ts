@@ -1,8 +1,9 @@
-import { BASE_URL } from '../constants/baseURL';
-import { del, get, patch, post } from '../utils/fetcher';
-import getQueryString from '../utils/getQueryString';
-import { IFetchSuccess, IPaginationDto } from '../interfaces/common.interface';
-import { IInvitedUserData, IUser, IUserDetail } from '../interfaces/user.interface';
+import { BASE_URL } from 'constants/baseURL';
+import { del, get, patch, post } from 'utils/fetcher';
+import getQueryString from 'utils/getQueryString';
+import { IFetchSuccess, IPaginationDto } from 'interfaces/common.interface';
+import { IInvitedUserData, IUser, IUserDetail } from 'interfaces/user.interface';
+
 import { IInvitedSignupDto, IInviteUserDto, IPatchMeDto, IPatchUserDto } from './user.dto';
 
 export function getUsers(query: IPaginationDto) {

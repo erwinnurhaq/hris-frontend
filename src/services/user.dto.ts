@@ -1,4 +1,4 @@
-import { TEducationalStage, TRole } from '../interfaces/user.interface';
+import { TEducationalStage, TRole } from 'interfaces/user.interface';
 
 export interface IInviteUserDto {
   name: string;

@@ -2,8 +2,8 @@ import { FormEvent, useEffect, useRef, useState } from 'react';
 import { NavigateFunction, useNavigate } from 'react-router-dom';
 import { message } from 'antd';
 
-import { userLogin } from '../../../services/auth.service';
-import { TFormElements } from '../../../interfaces/common.interface';
+import { userLogin } from 'services/auth.service';
+import { TFormElements } from 'interfaces/common.interface';
 import { TLoginFormElements } from './login.interface';
 
 function useLogin() {

@@ -1,10 +1,11 @@
 import { FormEvent, useEffect, useRef, useState } from 'react';
 import { message } from 'antd';
 
-import { userActivateResend, userSignup } from '../../../services/auth.service';
-import { getInvitedUserData, invitedSignup } from '../../../services/user.service';
-import { TFormElements } from '../../../interfaces/common.interface';
-import { IInvitedUserData } from '../../../interfaces/user.interface';
+import { userActivateResend, userSignup } from 'services/auth.service';
+import { getInvitedUserData, invitedSignup } from 'services/user.service';
+import { TFormElements } from 'interfaces/common.interface';
+import { IInvitedUserData } from 'interfaces/user.interface';
+
 import {
   IErrorPassInfo,
   IUserRef,
@@ -39,10 +40,10 @@ function useSignup() {
       confirmPassword: '',
     };
     if (password.length < 6) {
-      currentError.password = 'Password length min. 6 character';
+      currentError.password = 'Panjang password min. 6 karakter';
     }
     if (confirmPassword !== password) {
-      currentError.confirmPassword = 'Confirm password is not match';
+      currentError.confirmPassword = 'Konfirm password tidak cocok';
     }
     return currentError;
   }
@@ -82,7 +83,7 @@ function useSignup() {
       if (!isMounted.current) return;
 
       userRef.current = { email: form.email.value };
-      message.success('Email successfully sent.');
+      message.success('Email berhasil dikirim.');
       setAlertSection(
         isInvited ? SignupAlertSection.SUCCESS_INVITED_SIGNUP : SignupAlertSection.SUCCESS_SIGNUP
       );
@@ -102,7 +103,7 @@ function useSignup() {
       await userActivateResend(userRef.current.email);
       if (!isMounted.current) return;
 
-      message.success('Email successfully sent.');
+      message.success('Email berhasil dikirim.');
       setIsLoading(false);
     } catch (err: unknown) {
       if (!isMounted.current) return;
@@ -127,7 +128,7 @@ function useSignup() {
     } catch (err: unknown) {
       if (!isMounted.current) return;
 
-      message.error('Token is invalid');
+      message.error('Token tidak valid.');
       setIsInitialLoading(false);
       setIsInvited(true);
       setAlertSection(SignupAlertSection.ERROR_INVITED_DATA);

@@ -1,8 +1,9 @@
 import { FormEvent, useEffect, useRef, useState } from 'react';
 import { message } from 'antd';
 
-import { TFormElements } from '../../../interfaces/common.interface';
-import { userResetPassword } from '../../../services/auth.service';
+import { TFormElements } from 'interfaces/common.interface';
+import { userResetPassword } from 'services/auth.service';
+
 import { IErrorPassInfo } from '../Signup/signup.interface';
 import { TResetPasswordFormElements } from './resetpassword.interface';
 
@@ -23,10 +24,10 @@ function useResetPassword() {
       confirmPassword: '',
     };
     if (password.length < 6) {
-      currentError.password = 'Password length min. 6 character';
+      currentError.password = 'Panjang password min. 6 karakter';
     }
     if (confirmPassword !== password) {
-      currentError.confirmPassword = 'Confirm password is not match';
+      currentError.confirmPassword = 'Konfirm password tidak cocok';
     }
     return currentError;
   }
@@ -35,7 +36,7 @@ function useResetPassword() {
     if (ev.preventDefault) ev.preventDefault();
     if (isLoading) return;
     if (!tokenRef.current) {
-      message.error('Token is required');
+      message.error('Token diperlukan.');
       return;
     }
 
@@ -58,7 +59,7 @@ function useResetPassword() {
 
       if (!isMounted.current) return;
 
-      message.success('Successfully reset password.');
+      message.success('Password berhasil direset.');
       setIsSuccess(true);
       setIsLoading(false);
     } catch (err: unknown) {

@@ -1,5 +1,5 @@
-import MESSAGES from '../constants/genericMessages.json';
-import { userLogout, userRefresh } from '../services/auth.service';
+import MESSAGES from 'constants/genericMessages.json';
+import { userLogout, userRefresh } from 'services/auth.service';
 
 const jsonHeaders = { Accept: 'application/json', 'Content-Type': 'application/json' };
 

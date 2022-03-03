@@ -4,6 +4,7 @@ import './styles/index.css';
 import App from './routers';
 import reportWebVitals from './reportWebVitals';
 
+// iframe handle
 if (window.self && window.top) {
   if (window.self === window.top) {
     document.body.style.display = 'block';

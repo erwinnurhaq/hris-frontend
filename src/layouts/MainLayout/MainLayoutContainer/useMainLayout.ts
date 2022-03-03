@@ -2,8 +2,9 @@ import { useContext, useEffect, useMemo, useRef, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { message } from 'antd';
 
-import { userRefresh } from '../../../services/auth.service';
-import { getMe } from '../../../services/user.service';
+import { userRefresh } from 'services/auth.service';
+import { getMe } from 'services/user.service';
+
 import { MainLayoutContext } from '../MainLayoutContext';
 
 function useMainLayout() {

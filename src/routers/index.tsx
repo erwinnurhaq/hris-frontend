@@ -1,21 +1,21 @@
 import { BrowserRouter, Routes, Route, Navigate, Outlet } from 'react-router-dom';
 
 // Layout/Outlet
-import AuthLayout from '../layouts/AuthLayout';
-import MainLayout from '../layouts/MainLayout';
+import AuthLayout from 'layouts/AuthLayout';
+import MainLayout from 'layouts/MainLayout';
 
 // Auth Pages
-import Login from '../pages/Auth/Login';
-import Signup from '../pages/Auth/Signup';
-import Activate from '../pages/Auth/Activate';
-import ForgotPassword from '../pages/Auth/ForgotPassword';
-import ResetPassword from '../pages/Auth/ResetPassword';
+import Login from 'pages/Auth/Login';
+import Signup from 'pages/Auth/Signup';
+import Activate from 'pages/Auth/Activate';
+import ForgotPassword from 'pages/Auth/ForgotPassword';
+import ResetPassword from 'pages/Auth/ResetPassword';
 
 // Main Pages
-import Dashboard from '../pages/Dashboard';
-import ManageUser from '../pages/Manage/User';
-import NotFound from '../pages/NotFound';
-import Welcome from '../pages/Welcome';
+import Dashboard from 'pages/Dashboard';
+import ManageUser from 'pages/Manage/User';
+import NotFound from 'pages/NotFound';
+import Welcome from 'pages/Welcome';
 
 function App() {
   return (

@@ -1,8 +1,9 @@
-import { BASE_URL } from '../constants/baseURL';
-import { get, post } from '../utils/fetcher';
-import { IFetchSuccess } from '../interfaces/common.interface';
+import { BASE_URL } from 'constants/baseURL';
+import MESSAGES from 'constants/genericMessages.json';
+import { get, post } from 'utils/fetcher';
+import { IFetchSuccess } from 'interfaces/common.interface';
+
 import { IAuthLoginDto, IAuthResetPassDto, IAuthSignupDto } from './auth.dto';
-import MESSAGES from '../constants/genericMessages.json';
 
 export async function userRefresh() {
   try {

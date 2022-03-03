@@ -1,6 +1,7 @@
 import { Button, Input } from 'antd';
 
-import { ReactComponent as CheckSuccessIcon } from '../../../assets/icons/check-success.svg';
+import { ReactComponent as CheckSuccessIcon } from 'assets/icons/check-success.svg';
+
 import AlertSection from '../AlertSection';
 import useResetPassword from './useResetPassword';
 import { IUseResetPassword } from './resetpassword.interface';
@@ -13,9 +14,9 @@ function ResetPassword() {
   if (isSuccess) {
     return (
       <AlertSection
-        title="Password has been reset"
-        description="You can now login with your new password."
-        buttonLabel="Go to Login"
+        title="Password telah direset"
+        description="Sekarang anda bisa login menggunakan password baru anda."
+        buttonLabel="Ke Login"
         onButtonClick={onGoToLogin}
         icon={<CheckSuccessIcon />}
       />
@@ -26,22 +27,22 @@ function ResetPassword() {
     <form className="auth-pages-container animation-fade-in-top" onSubmit={onReset}>
       <h5 className="auth-pages__title reset-password__title">Reset Password</h5>
       <div className="auth-pages__input">
-        <p>New Password:</p>
+        <p>Password Baru:</p>
         <Input.Password
           type="password"
           name="password"
-          placeholder="Enter your new password"
+          placeholder="Masukkan password baru anda"
           disabled={isLoading}
           required
         />
         {error.password && <small>* {error.password}</small>}
       </div>
       <div className="auth-pages__input">
-        <p>Confirm Password:</p>
+        <p>Konfirm Password:</p>
         <Input.Password
           type="password"
           name="confirmPassword"
-          placeholder="Confirm your password"
+          placeholder="Masukkan konfirm password"
           disabled={isLoading}
           required
         />

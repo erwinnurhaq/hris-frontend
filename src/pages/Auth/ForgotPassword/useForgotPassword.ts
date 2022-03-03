@@ -2,8 +2,8 @@ import { FormEvent, useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { message } from 'antd';
 
-import { TFormElements } from '../../../interfaces/common.interface';
-import { userRequestResetPassword } from '../../../services/auth.service';
+import { TFormElements } from 'interfaces/common.interface';
+import { userRequestResetPassword } from 'services/auth.service';
 
 function useForgotPassword() {
   const navigate = useNavigate();
@@ -24,7 +24,7 @@ function useForgotPassword() {
       await userRequestResetPassword(form.email.value);
       if (!isMounted.current) return;
 
-      message.success('Email successfully sent.');
+      message.success('Email berhasil dikirim.');
       setIsSuccess(true);
       setIsLoading(false);
     } catch (err: unknown) {

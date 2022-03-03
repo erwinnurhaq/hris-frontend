@@ -1,8 +1,9 @@
 import { Navigate, Outlet } from 'react-router-dom';
 
-import AuthLayoutBg from '../../assets/images/auth-layout-bg.jpg';
-import HRISLogo from '../../assets/images/hris-logo.png';
-import LoaderBlock from '../../components/Loader/LoaderBlock';
+import AuthLayoutBg from 'assets/images/auth-layout-bg.jpg';
+import HRISLogo from 'assets/images/hris-logo.png';
+import LoaderBlock from 'components/Loader/LoaderBlock';
+
 import useAuthLayout from './useAuthLayout';
 import './style.css';
 
